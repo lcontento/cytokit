@@ -149,7 +149,7 @@ class PipelineConfig(object):
     @property
     def region_tiles(self):
         """Get 0-based pairs of region and tile indexes to process"""
-        # Compute cartesian product of region and tile (0-based) index list 
+        # Compute cartesian product of region and tile (0-based) index list
         return np.array(list(itertools.product(*(self.region_indexes, self.tile_indexes))))
 
 
@@ -373,7 +373,7 @@ def run_task(task_config, ops, process_fn):
                 measure_data = concat([measure_data, monitor.data])
 
                 log_fn('Processing complete')
-                
+
     return measure_data
 
 
@@ -413,7 +413,7 @@ def run_tasks(pl_conf, task_type, task_fn, logging_init_fn):
             client.run(logging_init_fn)
 
         # Disable the "auto_restart" feature of dask workers which is of no use in this context
-        for worker in cluster.workers:
+        for worker in cluster.workers.values():
             worker.auto_restart = False
 
         # Pass tasks to each worker to execute in parallel
@@ -462,7 +462,3 @@ def run(pl_conf, logging_init_fn=None):
 
     stop = timer()
     logger.info('Pipeline execution completed in %.0f seconds', stop - start)
-
-
-
-

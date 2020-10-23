@@ -35,7 +35,7 @@ def _load_config(path):
         path = osp.join(path, DEFAULT_CONFIG_FILE)
     logger.info('Loading experiment configuration from file "%s"', path)
     with open(path, 'r') as f:
-        return yaml.load(f)
+        return yaml.load(f, Loader=yaml.FullLoader)
 
 
 class QuantificationPipeline(object):

@@ -19,6 +19,6 @@ fcswrite
 tifffile
 fire
 seaborn
-tensorflow-gpu<2.0.0
-flowdec[tf_gpu]
+tensorflow<2.0.0
+flowdec[tf]
 imagecodecs

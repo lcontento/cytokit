@@ -9,7 +9,7 @@ CPP_LEVEL_WARN = '1'
 CPP_LEVEL_ERROR = '2'
 CPP_LEVEL_FATAL = '3'
 CPP_LEVEL_MAP = {
-    logging.DEBUG: CPP_LEVEL_INFO, 
+    logging.DEBUG: CPP_LEVEL_INFO,
     logging.INFO: CPP_LEVEL_INFO,
     logging.WARN: CPP_LEVEL_WARN,
     logging.ERROR: CPP_LEVEL_ERROR,
@@ -19,7 +19,7 @@ CPP_LEVEL_MAP = {
 
 def log_level_code(ll):
     """Resolve string names for log levels to integer codes
-    
+
     Args:
         ll: Log level as string or code; if this is something other than a string
             it will be returned as is and if it is a string it will be converted
@@ -36,7 +36,7 @@ def init_tf_logging(cpp_log_level=logging.WARN, py_log_level=logging.WARN):
     cpp_log_level = CPP_LEVEL_MAP.get(log_level_code(cpp_log_level), CPP_LEVEL_WARN)
     var = 'TF_CPP_MIN_LOG_LEVEL'
     os.environ[var] = os.getenv(var, cpp_log_level)  # Override only if not set already
-    tf.logging.set_verbosity(py_log_level)
+    tf.compat.v1.logging.set_verbosity(py_log_level)
 
 
 def tf_print(t, transform=None):

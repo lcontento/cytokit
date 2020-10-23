@@ -18,7 +18,7 @@ def _load_config(data_dir, filename):
         raise ValueError('Required configuration file "{}" does not exist'.format(f))
     if filename.endswith('.yaml'):
         with open(f, 'r') as fd:
-            return yaml.load(fd)
+            return yaml.load(fd, Loader=yaml.FullLoader)
     elif filename.endswith('.json'):
         with open(f, 'r') as fd:
             return json.load(fd)
